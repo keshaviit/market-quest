@@ -147,12 +147,12 @@ export const CORRECT_PREDICTION_BONUS = 150;
 export const getBadge = (finalWealth, startingWealth) => {
   const gain = finalWealth - startingWealth;
   if (gain >= 1500) {
-    return { label: 'Smart Investor', emoji: '🧠', color: 'from-emerald-400 to-teal-500', desc: 'Amazing! You made great decisions and grew your money a lot!' };
+    return { label: 'Smart Investor', emoji: '🧠', colorA: '#10b981', colorB: '#0d9488', desc: 'Amazing! You made great decisions and grew your money a lot!' };
   } else if (gain >= 500) {
-    return { label: 'Risk Hero', emoji: '🚀', color: 'from-violet-400 to-purple-600', desc: 'Great job! You took smart risks and came out ahead!' };
+    return { label: 'Risk Hero', emoji: '🚀', colorA: '#8b5cf6', colorB: '#7c3aed', desc: 'Great job! You took smart risks and came out ahead!' };
   } else if (gain >= 0) {
-    return { label: 'Money Hero', emoji: '⭐', color: 'from-amber-400 to-orange-500', desc: 'Good effort! You kept your money safe and learned a lot!' };
+    return { label: 'Money Hero', emoji: '⭐', colorA: '#f59e0b', colorB: '#f97316', desc: 'Good effort! You kept your money safe and learned a lot!' };
   } else {
-    return { label: 'Market Explorer', emoji: '🌍', color: 'from-sky-400 to-blue-500', desc: 'Don\'t worry! Every expert investor started by learning from mistakes. Try again!' };
+    return { label: 'Market Explorer', emoji: '🌍', colorA: '#0ea5e9', colorB: '#2563eb', desc: "Don't worry! Every expert started by learning from mistakes. Try again!" };
   }
 };

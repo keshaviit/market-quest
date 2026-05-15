@@ -1,97 +1,96 @@
 import { motion } from 'framer-motion';
 import { STARTING_CASH, TOTAL_ROUNDS } from '../data/constants';
 
+const COMPANIES = [
+  { emoji: '🍫', name: 'ChocoBlast', price: '₹100' },
+  { emoji: '🎮', name: 'PlayForge',  price: '₹200' },
+  { emoji: '🤖', name: 'RoboSpark',  price: '₹300' },
+];
+
 export default function WelcomeScreen({ onStart }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-400 via-violet-500 to-purple-600 flex flex-col items-center justify-center p-6 overflow-hidden">
-      {/* Background decorative circles */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-      <div className="absolute bottom-20 right-10 w-48 h-48 bg-pink-400/20 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-5 w-20 h-20 bg-yellow-300/20 rounded-full blur-2xl" />
-
-      {/* Floating emojis */}
-      <div className="absolute top-16 left-1/4 text-4xl float-emoji" style={{ animationDelay: '0s' }}>📈</div>
-      <div className="absolute top-24 right-1/4 text-3xl float-emoji" style={{ animationDelay: '0.8s' }}>💰</div>
-      <div className="absolute bottom-28 left-1/5 text-3xl float-emoji" style={{ animationDelay: '1.5s' }}>⭐</div>
-      <div className="absolute bottom-20 right-1/5 text-4xl float-emoji" style={{ animationDelay: '0.4s' }}>🚀</div>
-
+    <div className="min-h-screen flex items-center justify-center p-5">
       <motion.div
-        initial={{ scale: 0.7, opacity: 0, y: 30 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, type: 'spring', stiffness: 200 }}
-        className="text-center relative z-10 max-w-md w-full"
+        initial={{ opacity: 0, y: 28 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="game-card w-full max-w-sm overflow-hidden"
       >
-        {/* Logo / emoji cluster */}
-        <div className="mb-4 flex justify-center gap-3 text-5xl">
-          <span className="bounce-in inline-block" style={{ animationDelay: '0.1s' }}>🍫</span>
-          <span className="bounce-in inline-block" style={{ animationDelay: '0.2s' }}>🎮</span>
-          <span className="bounce-in inline-block" style={{ animationDelay: '0.3s' }}>🤖</span>
-        </div>
+        {/* Amber top accent */}
+        <div className="h-2 bg-amber-400 w-full" />
 
-        {/* Title */}
-        <h1 className="text-6xl font-black text-white drop-shadow-lg mb-1 tracking-tight">
-          Market
-        </h1>
-        <h1 className="text-6xl font-black text-yellow-300 drop-shadow-lg mb-4 tracking-tight">
-          Quest!
-        </h1>
+        <div className="flex flex-col items-center px-7 py-8 gap-5">
 
-        <p className="text-white/90 font-bold text-lg mb-6 leading-relaxed">
-          Learn how the stock market works <br />
-          <span className="text-yellow-200">while playing a fun game! 🎯</span>
-        </p>
+          {/* Header label */}
+          <div className="flex items-center gap-2">
+            <span className="text-lg">📈</span>
+            <p className="text-xs font-black uppercase tracking-widest text-gray-400">Market Quest</p>
+          </div>
 
-        {/* Info cards */}
-        <div className="grid grid-cols-3 gap-3 mb-7">
-          {[
-            { icon: '💵', label: 'Start with', value: `₹${STARTING_CASH.toLocaleString()}` },
-            { icon: '🔄', label: 'Play for', value: `${TOTAL_ROUNDS} Rounds` },
-            { icon: '🏆', label: 'Earn a', value: 'Badge!' },
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + i * 0.15 }}
-              className="bg-white/20 backdrop-blur-sm rounded-2xl p-3 border border-white/30"
-            >
-              <div className="text-2xl mb-1">{item.icon}</div>
-              <p className="text-white/70 text-xs font-bold">{item.label}</p>
-              <p className="text-white font-black text-sm">{item.value}</p>
-            </motion.div>
-          ))}
-        </div>
+          {/* Emoji trio */}
+          <div className="flex gap-4">
+            {COMPANIES.map((c, i) => (
+              <motion.div
+                key={c.name}
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.1 + i * 0.1, type: 'spring', stiffness: 220 }}
+                className="float"
+                style={{ animationDelay: `${i * 0.4}s` }}
+              >
+                <div className="w-16 h-16 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center text-4xl shadow-sm">
+                  {c.emoji}
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
-        {/* Companies preview */}
-        <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-3 mb-6 border border-white/20">
-          <p className="text-white/70 font-bold text-xs mb-2 uppercase tracking-wider">You'll trade shares of</p>
-          <div className="flex justify-center gap-4">
+          {/* Title */}
+          <div className="text-center">
+            <h1 className="font-black text-gray-800 text-5xl leading-tight">Market<br/>Quest!</h1>
+            <p className="text-gray-400 font-bold text-sm mt-2">Learn the stock market by playing! 🎯</p>
+          </div>
+
+          {/* Stats */}
+          <div className="w-full grid grid-cols-3 gap-2">
             {[
-              { emoji: '🍫', name: 'ChocoBlast' },
-              { emoji: '🎮', name: 'PlayForge' },
-              { emoji: '🤖', name: 'RoboSpark' },
-            ].map((c, i) => (
-              <div key={i} className="text-center">
-                <div className="text-3xl">{c.emoji}</div>
-                <p className="text-white font-black text-xs">{c.name}</p>
+              { icon: '💵', label: 'Start with', value: `₹${STARTING_CASH.toLocaleString()}` },
+              { icon: '🔄', label: 'Rounds',     value: `${TOTAL_ROUNDS} only` },
+              { icon: '🏅', label: 'Win a',      value: 'Badge!' },
+            ].map(s => (
+              <div key={s.label} className="rounded-xl bg-gray-50 border border-gray-200 py-3 text-center">
+                <div className="text-xl mb-0.5">{s.icon}</div>
+                <p className="text-gray-400 text-xs font-bold">{s.label}</p>
+                <p className="text-gray-800 font-black text-sm">{s.value}</p>
               </div>
             ))}
           </div>
+
+          {/* Company list */}
+          <div className="w-full rounded-xl border border-gray-200 bg-gray-50 divide-y divide-gray-200">
+            {COMPANIES.map(c => (
+              <div key={c.name} className="flex items-center justify-between px-4 py-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">{c.emoji}</span>
+                  <span className="font-black text-gray-700 text-sm">{c.name}</span>
+                </div>
+                <span className="font-bold text-amber-500 text-sm">{c.price} / share</span>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            onClick={onStart}
+            className="btn-amber amber-pulse w-full py-5 rounded-2xl text-xl"
+          >
+            🚀 Start Playing!
+          </motion.button>
+
+          <p className="text-gray-300 text-xs font-bold">Class 5 – Class 10 · Virtual money only</p>
         </div>
-
-        {/* CTA button */}
-        <motion.button
-          whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(255,255,255,0.4)' }}
-          whileTap={{ scale: 0.97 }}
-          onClick={onStart}
-          className="w-full py-5 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-3xl font-black text-2xl shadow-2xl hover:from-yellow-300 hover:to-orange-300 transition-all mb-3"
-        >
-          🚀 Start Playing!
-        </motion.button>
-
-        <p className="text-white/60 text-xs font-semibold">
-          Perfect for Class 5 to Class 10 students
-        </p>
       </motion.div>
     </div>
   );

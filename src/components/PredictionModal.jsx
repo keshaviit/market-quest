@@ -1,56 +1,67 @@
 import { motion } from 'framer-motion';
 
 export default function PredictionModal({ event, onPredict }) {
-  const company = event.companyId;
-
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-5"
+      style={{ background: 'rgba(0,0,0,0.45)' }}>
+
       <motion.div
-        initial={{ scale: 0.5, opacity: 0 }}
+        initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 text-center border-4 border-indigo-300"
+        transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+        className="game-card w-full max-w-sm overflow-hidden"
       >
-        {/* Icon */}
-        <div className="text-5xl mb-3 bounce-in">🔮</div>
+        {/* Amber top bar */}
+        <div className="h-2 bg-amber-400" />
 
-        <h2 className="text-2xl font-black text-indigo-700 mb-2">Predict It!</h2>
-        <p className="text-gray-600 font-semibold text-sm mb-4 leading-relaxed">
-          Before we reveal the news, can you guess what will happen to{' '}
-          <span className="font-black text-indigo-700">{event.headline.split('!')[0].replace(/[🍫🎮🤖🌟😬😟🏆💻⚡🚀🌧️]/gu, '').trim().split(' ').slice(0,2).join(' ')}</span>?
-        </p>
+        <div className="px-6 py-6 flex flex-col gap-4">
+          {/* Header */}
+          <div className="text-center">
+            <p className="text-xs text-gray-400 font-black uppercase tracking-widest mb-1">🔮 Make your call!</p>
+            <h2 className="font-black text-gray-800 text-2xl">What will happen?</h2>
+          </div>
 
-        {/* Preview card */}
-        <div className="bg-indigo-50 rounded-2xl p-3 mb-5 border border-indigo-100">
-          <p className="text-sm font-bold text-gray-700 leading-snug">{event.headline}</p>
+          {/* News box */}
+          <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-red-500 text-sm">📰</span>
+              <p className="text-xs text-red-500 font-black uppercase tracking-wider">Daily Bugle</p>
+            </div>
+            <p className="font-bold text-gray-700 text-sm leading-snug">{event.headline}</p>
+          </div>
+
+          <p className="text-center text-sm font-bold text-gray-500">
+            Will the share price go...
+          </p>
+
+          {/* UP / DOWN buttons */}
+          <div className="flex gap-3">
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.94 }}
+              onClick={() => onPredict('up')}
+              className="flex-1 py-5 rounded-2xl font-black text-white text-xl flex flex-col items-center gap-1"
+              style={{ background: 'linear-gradient(135deg,#22c55e,#16a34a)' }}
+            >
+              <span>📈</span>
+              <span>UP!</span>
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.94 }}
+              onClick={() => onPredict('down')}
+              className="flex-1 py-5 rounded-2xl font-black text-white text-xl flex flex-col items-center gap-1"
+              style={{ background: 'linear-gradient(135deg,#f43f5e,#e11d48)' }}
+            >
+              <span>📉</span>
+              <span>DOWN!</span>
+            </motion.button>
+          </div>
+
+          <p className="text-center text-xs text-gray-400 font-semibold">
+            ✨ Guess right → get ₹150 bonus!
+          </p>
         </div>
-
-        <p className="text-base font-black text-gray-700 mb-4">
-          Will the share price go...
-        </p>
-
-        <div className="flex gap-3">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => onPredict('up')}
-            className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-4 rounded-2xl font-black text-lg shadow-md transition-colors"
-          >
-            📈 Up!
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => onPredict('down')}
-            className="flex-1 bg-rose-500 hover:bg-rose-600 text-white py-4 rounded-2xl font-black text-lg shadow-md transition-colors"
-          >
-            📉 Down!
-          </motion.button>
-        </div>
-
-        <p className="text-xs text-gray-400 font-semibold mt-3">
-          ✨ Guess right and get a bonus!
-        </p>
       </motion.div>
     </div>
   );

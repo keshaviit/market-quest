@@ -3,34 +3,38 @@ import { CORRECT_PREDICTION_BONUS } from '../data/constants';
 
 export default function EventPopup({ event, predictionResult, onContinue }) {
   const correct = predictionResult === event.direction;
+  const isUp    = event.direction === 'up';
+  const pct     = Math.abs(Math.round(event.priceChange * 100));
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-5"
+      style={{ background: 'rgba(0,0,0,0.45)' }}>
+
       <motion.div
-        initial={{ scale: 0.5, opacity: 0, rotate: -5 }}
+        initial={{ scale: 0.8, opacity: 0, rotate: -3 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
-        transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-        className="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden border-4 border-yellow-300"
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+        className="game-card w-full max-w-sm overflow-hidden"
       >
-        {/* Header */}
-        <div className="bg-gradient-to-r from-yellow-400 to-orange-400 p-4 text-center">
-          <p className="text-white font-black text-sm uppercase tracking-widest mb-1">📰 Breaking News!</p>
-          <div className="text-4xl">⚡</div>
-        </div>
+        {/* Amber top bar */}
+        <div className="h-2 bg-amber-400" />
 
-        <div className="p-5">
-          {/* Headline */}
-          <h3 className="text-lg font-black text-gray-800 text-center leading-snug mb-2">
-            {event.headline}
-          </h3>
-          <p className="text-gray-500 font-semibold text-sm text-center mb-4">{event.detail}</p>
+        <div className="px-6 py-6 flex flex-col gap-4">
+          {/* Breaking news header */}
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-red-500 text-sm">📰</span>
+            <p className="text-xs text-red-500 font-black uppercase tracking-wider">Daily Bugle</p>
+          </div>
 
-          {/* Price change indicator */}
-          <div className={`rounded-2xl p-3 mb-4 text-center ${event.direction === 'up' ? 'bg-emerald-100 border-2 border-emerald-300' : 'bg-rose-100 border-2 border-rose-300'}`}>
-            <p className="text-sm font-bold text-gray-600 mb-1">Share price changed by</p>
-            <p className={`text-3xl font-black ${event.direction === 'up' ? 'text-emerald-600' : 'text-rose-600'}`}>
-              {event.direction === 'up' ? '📈' : '📉'}{' '}
-              {event.direction === 'up' ? '+' : ''}{Math.round(event.priceChange * 100)}%
+          <h3 className="font-black text-gray-800 text-lg leading-snug">{event.headline}</h3>
+          <p className="text-sm text-gray-500 font-semibold leading-snug -mt-2">{event.detail}</p>
+
+          {/* Price change pill */}
+          <div className={`rounded-xl py-3 text-center border ${isUp ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}`}>
+            <p className="text-xs text-gray-400 font-semibold mb-1">Price changed by</p>
+            <p className={`font-black text-3xl ${isUp ? 'text-green-600' : 'text-red-500'}`}>
+              {isUp ? '📈 +' : '📉 −'}{pct}%
             </p>
           </div>
 
@@ -38,34 +42,30 @@ export default function EventPopup({ event, predictionResult, onContinue }) {
           <AnimatePresence>
             {predictionResult && (
               <motion.div
-                initial={{ scale: 0, opacity: 0 }}
+                initial={{ scale: 0.7, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className={`rounded-2xl p-3 mb-4 text-center ${correct ? 'bg-emerald-50 border-2 border-emerald-300' : 'bg-rose-50 border-2 border-rose-300'}`}
+                className={`rounded-xl py-3 text-center border ${correct ? 'border-green-200 bg-green-50' : 'border-red-100 bg-red-50'}`}
               >
+                <div className={`text-3xl mb-1 ${correct ? 'wiggle' : 'shake'}`}>{correct ? '🎉' : '😅'}</div>
                 {correct ? (
                   <>
-                    <p className="text-2xl mb-1">🎉</p>
-                    <p className="font-black text-emerald-700 text-base">Wow, correct guess!</p>
-                    <p className="text-sm font-bold text-emerald-600">You earned a bonus of ₹{CORRECT_PREDICTION_BONUS}! 💰</p>
+                    <p className="font-black text-green-700">Correct! +₹{CORRECT_PREDICTION_BONUS} bonus!</p>
                   </>
                 ) : (
-                  <>
-                    <p className="text-2xl mb-1">😅</p>
-                    <p className="font-black text-rose-700 text-base">Oops, wrong guess!</p>
-                    <p className="text-sm font-bold text-rose-500">Better luck next round!</p>
-                  </>
+                  <p className="font-black text-red-500">Wrong guess! Better luck next round 💪</p>
                 )}
               </motion.div>
             )}
           </AnimatePresence>
 
+          {/* Continue button */}
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={onContinue}
-            className="w-full py-4 bg-gradient-to-r from-indigo-500 to-violet-500 text-white rounded-2xl font-black text-lg shadow-lg hover:shadow-indigo-200 transition-all pulse-btn"
+            className="btn-amber w-full py-4 rounded-2xl text-base"
           >
-            Continue Shopping! 🛒
+            Next Round →
           </motion.button>
         </div>
       </motion.div>

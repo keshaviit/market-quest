@@ -1,89 +1,82 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
-
-:root {
-  font-family: 'Nunito', sans-serif;
+@layer base {
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f8fafc;
+    background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+    color: #1e293b;
+  }
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@layer utilities {
+  .font-hand {
+    font-family: 'Kalam', cursive;
+  }
+  
+  .game-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1.5px solid #475569;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  .trade-btn {
+    background: #ffffff;
+    border: 1.5px solid #475569;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: all 0.15s ease;
+  }
+  
+  .trade-btn:hover {
+    background: #f1f5f9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .trade-btn:active {
+    transform: translateY(1px);
+    box-shadow: none;
+  }
+
+  .dashed-line {
+    border-top: 2px dashed #94a3b8;
+    width: 100%;
+    margin: 12px 0;
+  }
 }
 
-body {
-  background: #f0f9ff;
-  font-family: 'Nunito', sans-serif;
-  min-height: 100vh;
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
+.float { animation: float 3s ease-in-out infinite; }
+.float-delay { animation: float 3.5s ease-in-out infinite 0.5s; }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+@keyframes flashGreen {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: #dcfce7; }
 }
-::-webkit-scrollbar-track {
-  background: #e0f2fe;
+@keyframes flashRed {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: #fee2e2; }
 }
-::-webkit-scrollbar-thumb {
-  background: #7dd3fc;
-  border-radius: 4px;
-}
+.flash-up { animation: flashGreen 1s ease; }
+.flash-down { animation: flashRed 1s ease; }
 
-/* Shake animation for wrong prediction */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-8px); }
-  40% { transform: translateX(8px); }
-  60% { transform: translateX(-8px); }
-  80% { transform: translateX(8px); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
 }
-
-/* Bounce animation */
-@keyframes bounce-in {
-  0% { transform: scale(0.5); opacity: 0; }
-  60% { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* Float animation for welcome screen emojis */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
-
-/* Pulse glow */
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
-  50% { box-shadow: 0 0 0 12px rgba(99, 102, 241, 0); }
-}
-
-/* Stars burst for badges */
-@keyframes star-burst {
-  0% { transform: scale(0) rotate(0deg); opacity: 0; }
-  50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
-  100% { transform: scale(1) rotate(360deg); opacity: 1; }
-}
-
-.shake { animation: shake 0.5s ease; }
-.bounce-in { animation: bounce-in 0.4s ease forwards; }
-.float-emoji { animation: float 3s ease-in-out infinite; }
-.pulse-btn { animation: pulse-glow 2s infinite; }
-.star-anim { animation: star-burst 0.6s ease forwards; }
-
-/* Price flash animations */
-.price-up {
-  animation: flash-green 0.8s ease;
-}
-.price-down {
-  animation: flash-red 0.8s ease;
-}
-
-@keyframes flash-green {
-  0%, 100% { background-color: transparent; }
-  50% { background-color: #bbf7d0; }
-}
-@keyframes flash-red {
-  0%, 100% { background-color: transparent; }
-  50% { background-color: #fecaca; }
-}
+.wiggle { animation: wiggle 0.4s ease 2; }
+.shake { animation: shake 0.4s ease; }
