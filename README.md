@@ -1,16 +1,21 @@
-# React + Vite
+# Market Quest 📈
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A child-friendly, interactive stock market simulation game built with React and Vite. It teaches students (Class 5 to 10) the basics of the stock market through a fun, 5-round game loop where they can predict news, buy and sell shares, and learn about diversification.
 
-Currently, two official plugins are available:
+## Features
+- **Buy & Sell Mechanism:** Trade shares in 3 fictional companies (ChocoBlast 🍫, PlayForge 🎮, RoboSpark 🤖).
+- **News Events:** Random market events dynamically impact stock prices.
+- **Predict to Earn:** Make correct predictions on news headlines to earn bonus cash.
+- **Dynamic Market:** Unrelated stocks have slight random fluctuations so the market feels alive.
+- **End-of-Game Badges:** Results screen rewards players with badges (e.g. Smart Investor, Risk Hero) based on performance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+- React + Vite
+- Tailwind CSS
+- Framer Motion (for smooth micro-animations)
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## How to Play Locally
+1. Clone the repository
+2. Run `npm install`
+3. Run `npm run dev`
+4. Open your browser to the local port (usually `localhost:5173`)
