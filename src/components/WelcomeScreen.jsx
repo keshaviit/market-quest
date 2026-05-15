@@ -3,13 +3,13 @@ import { STARTING_CASH, TOTAL_ROUNDS } from '../data/constants';
 
 const COMPANIES = [
   { emoji: '🍫', name: 'ChocoBlast', price: '₹100' },
-  { emoji: '🎮', name: 'PlayForge',  price: '₹200' },
-  { emoji: '🤖', name: 'RoboSpark',  price: '₹300' },
+  { emoji: '🎮', name: 'PlayForge', price: '₹200' },
+  { emoji: '🤖', name: 'RoboSpark', price: '₹300' },
 ];
 
 export default function WelcomeScreen({ onStart }) {
   return (
-    <div className="min-h-screen flex items-center justify-center p-5">
+    <div className="min-h-screen flex items-center justify-center p-6">
       <motion.div
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function WelcomeScreen({ onStart }) {
 
           {/* Title */}
           <div className="text-center">
-            <h1 className="font-black text-gray-800 text-5xl leading-tight">Market<br/>Quest!</h1>
+            <h1 className="font-red text-gray-800 text-4xl leading-tight px-2 py-2 ">Keshav<br />Quest!</h1>
             <p className="text-gray-400 font-bold text-sm mt-2">Learn the stock market by playing! 🎯</p>
           </div>
 
@@ -55,8 +55,8 @@ export default function WelcomeScreen({ onStart }) {
           <div className="w-full grid grid-cols-3 gap-2">
             {[
               { icon: '💵', label: 'Start with', value: `₹${STARTING_CASH.toLocaleString()}` },
-              { icon: '🔄', label: 'Rounds',     value: `${TOTAL_ROUNDS} only` },
-              { icon: '🏅', label: 'Win a',      value: 'Badge!' },
+              { icon: '🔄', label: 'Rounds', value: `${TOTAL_ROUNDS} only` },
+              { icon: '🏅', label: 'Win a', value: 'Badge!' },
             ].map(s => (
               <div key={s.label} className="rounded-xl bg-gray-50 border border-gray-200 py-3 text-center">
                 <div className="text-xl mb-0.5">{s.icon}</div>
