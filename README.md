@@ -2,6 +2,7 @@
 
 A child-friendly, interactive stock market simulation game built with React and Vite. It teaches students (Class 5 to 10) the basics of the stock market through a fun, 5-round game loop where they can predict news, buy and sell shares, and learn about diversification.
 
+Deployment   link :https://market-quest.vercel.app/
 ## Features
 - **Buy & Sell Mechanism:** Trade shares in 3 fictional companies (ChocoBlast 🍫, PlayForge 🎮, RoboSpark 🤖).
 - **News Events:** Random market events dynamically impact stock prices.
